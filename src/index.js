@@ -3,7 +3,15 @@ const redux = require("redux");
 
 const initialState = {
   count: 0,
-  favoriteThing: []
+  favoriteThing: [],
+  youTubeVideos: {
+    title: "",
+    viewCount: 0,
+    votes: {
+      up: 0,
+      down: 0
+    }
+  }
 };
 
 function changeCount(changeType = "INC-DEC", amount = 3) {
@@ -15,6 +23,16 @@ function addFavorite(favoriteThing) {
 function removeFavorite(favThingToRemove) {
   return { type: "REMOVE-FAVORITE", payload: favThingToRemove };
 }
+function addTitle(title) {
+  return { type: "ADD-TITLE", payload: title };
+}
+function upVote() {
+  return { type: "UP-VOTE" };
+}
+function downVote(downCount) {
+  return { type: "DOWN-VOTE", payload: downCount };
+}
+
 function reducer(state = initialState, action) {
   switch (action.type) {
     case "INC-DEC":
@@ -39,9 +57,42 @@ function reducer(state = initialState, action) {
       };
     case "REMOVE-FAVORITE":
       return {
+        ...state,
         favoriteThing: state.favoriteThing.filter(
           thing => thing !== action.payload
         )
+      };
+    case "ADD-TITLE":
+      return {
+        ...state,
+        youTubeVideos: {
+          ...state.youTubeVideos,
+          title: action.payload
+        }
+      };
+    case "UP-VOTE":
+      return {
+        ...state,
+        youTubeVideos: {
+          ...state.youTubeVideos,
+          viewCount: state.youTubeVideos.votes.up + 1,
+          votes: {
+            ...state.youTubeVideos.votes,
+            up: state.youTubeVideos.votes.up + 1
+          }
+        }
+      };
+    case "DOWN-VOTE":
+      return {
+        ...state,
+        youTubeVideos: {
+          ...state.youTubeVideos,
+          viewCount: state.youTubeVideos.votes.up + 1,
+          votes: {
+            ...state.youTubeVideos.votes,
+            down: state.youTubeVideos.votes.up - 1
+          }
+        }
       };
     default:
       return state;
@@ -51,9 +102,9 @@ function reducer(state = initialState, action) {
 //configure store
 const store = redux.createStore(reducer);
 store.subscribe(() => {
-  //console.log(store.getState().count);
-  console.log(store.getState().favoriteThing);
+  console.log(store.getState());
 });
+
 //dispatch actions
 store.dispatch(changeCount("INC-DEC", 3));
 store.dispatch(changeCount("DOUBLE"));
@@ -62,3 +113,8 @@ store.dispatch(changeCount("HALVE"));
 store.dispatch(addFavorite("I love react"));
 store.dispatch(removeFavorite("I love react"));
 store.dispatch(removeFavorite("Node"));
+store.dispatch(addTitle("Good ddeed"));
+store.dispatch(addTitle("Hi there"));
+store.dispatch(upVote());
+store.dispatch(upVote());
+store.dispatch(downVote());
