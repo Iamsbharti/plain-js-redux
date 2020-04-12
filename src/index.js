@@ -3,7 +3,7 @@ const redux = require("redux");
 
 const initialState = {
   count: 0,
-  favoriteNumber: []
+  favoriteThing: []
 };
 
 function changeCount(changeType = "INC-DEC", amount = 3) {
@@ -12,7 +12,9 @@ function changeCount(changeType = "INC-DEC", amount = 3) {
 function addFavorite(favoriteThing) {
   return { type: "ADD-FAVORITE", payload: favoriteThing };
 }
-
+function removeFavorite(favThingToRemove) {
+  return { type: "REMOVE-FAVORITE", payload: favThingToRemove };
+}
 function reducer(state = initialState, action) {
   switch (action.type) {
     case "INC-DEC":
@@ -23,7 +25,7 @@ function reducer(state = initialState, action) {
     case "ADD-FAVORITE":
       return {
         ...state,
-        favoriteNumber: [...state.favoriteNumber, action.payload]
+        favoriteThing: [...state.favoriteThing, action.payload]
       };
     case "DOUBLE":
       return {
@@ -35,6 +37,12 @@ function reducer(state = initialState, action) {
         ...state,
         count: Math.random(state.count / 2)
       };
+    case "REMOVE-FAVORITE":
+      return {
+        favoriteThing: state.favoriteThing.filter(
+          thing => thing !== action.payload
+        )
+      };
     default:
       return state;
   }
@@ -43,11 +51,14 @@ function reducer(state = initialState, action) {
 //configure store
 const store = redux.createStore(reducer);
 store.subscribe(() => {
-  console.log(store.getState());
+  //console.log(store.getState().count);
+  console.log(store.getState().favoriteThing);
 });
 //dispatch actions
 store.dispatch(changeCount("INC-DEC", 3));
 store.dispatch(changeCount("DOUBLE"));
-store.dispatch(addFavorite("dahsgdhajsg"));
+store.dispatch(addFavorite("Node"));
 store.dispatch(changeCount("HALVE"));
 store.dispatch(addFavorite("I love react"));
+store.dispatch(removeFavorite("I love react"));
+store.dispatch(removeFavorite("Node"));
