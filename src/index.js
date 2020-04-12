@@ -49,3 +49,5 @@ store.subscribe(() => {
 store.dispatch(changeCount("INC-DEC", 3));
 store.dispatch(changeCount("DOUBLE"));
 store.dispatch(addFavorite("dahsgdhajsg"));
+store.dispatch(changeCount("HALVE"));
+store.dispatch(addFavorite("I love react"));
