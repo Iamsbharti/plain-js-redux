@@ -9,8 +9,8 @@ const initialState = {
 function changeCount(changeType = "INC-DEC", amount = 3) {
   return { type: changeType, payload: amount };
 }
-function addFavorite(favoriteNumber) {
-  return { type: "ADD-FAVORITE", payload: favoriteNumber };
+function addFavorite(favoriteThing) {
+  return { type: "ADD-FAVORITE", payload: favoriteThing };
 }
 
 function reducer(state = initialState, action) {
@@ -48,4 +48,4 @@ store.subscribe(() => {
 //dispatch actions
 store.dispatch(changeCount("INC-DEC", 3));
 store.dispatch(changeCount("DOUBLE"));
-store.dispatch(addFavorite(4));
+store.dispatch(addFavorite("dahsgdhajsg"));
