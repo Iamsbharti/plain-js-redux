@@ -8,5 +8,6 @@ export const initialState = {
       up: 0,
       down: 0
     }
-  }
+  },
+  user: {}
 };
