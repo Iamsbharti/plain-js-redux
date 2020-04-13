@@ -1,0 +1,9 @@
+export const INC_DEC = "INC_DEC";
+export const DOUBLE = "DOUBLE";
+export const HALVE = "HALVE";
+export const ADD_FAVORITE = "ADD_FAVORITE";
+export const REMOVE_FAVORITE = "REMOVE_FAVORITE";
+export const ADD_TITLE = "ADD_TITLE";
+export const UP_VOTE = "UP_VOTE";
+export const DOWN_VOTE = "DOWN_VOTE";
+export const ADD_VIEW_COUNT = "ADD_VIEW_COUNT";
