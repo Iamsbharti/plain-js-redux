@@ -9,6 +9,12 @@ export default function userReducers(user = initialState.user, action) {
         ...user,
         ...action.payload
       };
+    case types.REMOVE_USER:
+      return {
+        user: {
+          ...(user !== action.payload)
+        }
+      };
     default:
       return user;
   }

@@ -3,7 +3,7 @@ import * as types from "./redux/actions/actionType";
 import countActions from "./redux/actions/countActions";
 import favoriteActions from "./redux/actions/favoriteActions";
 import * as videosActions from "./redux/actions/videosActions";
-import userActions from "./redux/actions/userActions";
+import * as userActions from "./redux/actions/userActions";
 import store from "./redux/reducers/";
 
 store.dispatch(countActions(types.INC_DEC, -92));
@@ -21,11 +21,13 @@ const user = {
   id: "32462376",
   email: "dhgfh@agd.com"
 };
-store.dispatch(userActions(user));
+store.dispatch(userActions.addUser(user));
 const user1 = {
   firstName: "sdgdf",
   lastName: "dfgd",
   id: "dfgg",
   email: "dhgdffh@agd.com"
 };
-store.dispatch(userActions(user1));
+store.dispatch(userActions.addUser(user1));
+store.dispatch(userActions.removeUser("dfgg"));
+store.dispatch(userActions.addUser(user));
